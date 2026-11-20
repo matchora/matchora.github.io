@@ -146,8 +146,6 @@ img{display:block;max-width:100%}
 .vTx p{margin:0;direction:ltr;text-align:right;color:var(--mute)}
 .vTx .go{margin-top:auto;border:0;border-radius:10px;background:var(--fg);color:var(--bg);font-weight:800;padding:14px;font-size:17px}
 .vTx .go.on{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--line2)}
-.vTx a{color:var(--mute);font-size:14px;text-underline-offset:3px}
-.vTx a:hover{color:var(--fg)}
 .vBox .x{position:absolute;top:8px;left:8px;z-index:2;background:rgba(10,10,10,.8);color:var(--fg);backdrop-filter:blur(6px)}
 .toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,30px);background:var(--fg);color:var(--bg);padding:10px 20px;border-radius:999px;font-weight:700;opacity:0;transition:.2s;z-index:60;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -297,7 +295,6 @@ img{display:block;max-width:100%}
       <span class="lgn" id="vLg"></span>
       <h3 id="vTeam"></h3>
       <p id="vTitle"></p>
-      <a id="vMore" target="_blank" rel="noopener">עוד תמונות של החולצה</a>
       <button class="go" id="vGo">הוספה לרשימה</button>
     </div>
   </div>
@@ -309,7 +306,6 @@ img{display:block;max-width:100%}
 <script>
 // ---- settings: put a phone number here (972…) to send the list straight to one person ----
 const WA_PHONE = '972547740591';
-const SUPPLIER = id => `https://seepro.x.yupoo.com/albums/${id}?uid=1`;
 
 const $ = id => document.getElementById(id);
 const K = window.KITS, HE = K.he;
@@ -406,7 +402,6 @@ function openView(id) {
   $('vImg').src = `img/${id}.webp`; $('vImg').alt = i.t;
   $('vLg').textContent = [i.lg === 'עוד' ? '' : i.lg, KIND[i.k] ? `חולצת ${KIND[i.k]}` : '', i.s].filter(Boolean).join('  /  ');
   $('vTeam').textContent = he(i.team) === 'עוד' ? 'חולצה' : he(i.team); $('vTitle').textContent = i.t;
-  $('vMore').href = SUPPLIER(id); $('vMore').textContent = i.n > 1 ? `עוד ${i.n} תמונות של החולצה` : 'פתיחה אצל הספק';
   syncView(); $('view').classList.add('on'); $('shade').classList.add('on'); $('vGo').focus();
 }
 function syncView() { const on = inList(vId); $('vGo').textContent = on ? 'ברשימה. להסיר?' : 'הוספה לרשימה'; $('vGo').classList.toggle('on', on); }
